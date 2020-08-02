@@ -46,7 +46,7 @@ apt-get install -y nginx
 # /usr/local/bin/apt-get is working correctly).
 # see https://docs.docker.com/install/linux/docker-ce/ubuntu/
 # NB execute apt-cache madison docker-ce to known the available versions.
-docker_version="${1:-5:19.03.3~3-0~ubuntu-bionic}"; shift || true
+docker_version="${1:-5:19.03.12~3-0~ubuntu-focal}"; shift || true
 apt-get install -y apt-transport-https software-properties-common gnupg2
 wget -qO- https://download.docker.com/linux/ubuntu/gpg | apt-key add -
 add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"

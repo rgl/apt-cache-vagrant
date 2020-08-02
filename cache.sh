@@ -11,7 +11,17 @@ apt-get upgrade -y
 #
 # provision apt-cacher-ng.
 # see https://www.unix-ag.uni-kl.de/~bloch/acng/
-
+# NB these anwsers were obtained (after installing apt-cacher-ng) with:
+#
+#   #sudo debconf-show apt-cacher-ng
+#   sudo apt-get install debconf-utils
+#   # this way you can see the comments:
+#   sudo debconf-get-selections
+#   # this way you can just see the values needed for debconf-set-selections:
+#   sudo debconf-get-selections | grep -E '^apt-cacher-ng-.+\s+' | sort
+debconf-set-selections<<"EOF"
+apt-cacher-ng apt-cacher-ng/tunnelenable boolean false
+EOF
 apt-get install -y --no-install-recommends apt-cacher-ng
 
 # disable all mirrors (except ubuntu).

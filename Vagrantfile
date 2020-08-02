@@ -6,7 +6,7 @@ $ubuntu_ip_address = '10.10.10.4'
 $apt_proxy_url = "http://#{$cache_ip_address}:3142"
 
 Vagrant.configure('2') do |config|
-  config.vm.box = 'ubuntu-18.04-amd64'
+  config.vm.box = 'ubuntu-20.04-amd64'
 
   config.vm.provider 'libvirt' do |lv, config|
     lv.memory = 256
