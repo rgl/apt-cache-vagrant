@@ -1,5 +1,7 @@
 #!/bin/bash
-set -eux
+set -euxo pipefail
+
+apt_proxy_url="${1:-http://10.10.10.3:3142}"; shift || true
 
 #
 # configure APT to use our cache APT proxy.
@@ -7,7 +9,6 @@ set -eux
 # NB we cannot use APT::Update::Pre-Invoke because that is invoked after sources.list is
 #    loaded, so we had to override the apt-get command with our own version.
 
-apt_proxy_url='http://10.10.10.3:3142'
 echo "Acquire::http::Proxy \"$apt_proxy_url\";" >/etc/apt/apt.conf.d/00aptproxy
 cat >/usr/local/bin/apt-get <<EOF
 #!/bin/bash
