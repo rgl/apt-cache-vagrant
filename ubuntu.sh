@@ -44,13 +44,15 @@ apt-get install -y nginx
 #
 # install docker to see whether an https repository can be used (and our
 # /usr/local/bin/apt-get is working correctly).
-# see https://docs.docker.com/install/linux/docker-ce/ubuntu/
+# see https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#install-using-the-repository
 # NB execute apt-cache madison docker-ce to known the available versions.
-docker_version="${1:-5:19.03.12~3-0~ubuntu-focal}"; shift || true
-apt-get install -y apt-transport-https software-properties-common gnupg2
+docker_version='20.10.13'
+apt-get install -y apt-transport-https software-properties-common
 wget -qO- https://download.docker.com/linux/ubuntu/gpg | apt-key add -
 add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 apt-get update
-apt-get install -y "docker-ce=$docker_version" "docker-ce-cli=$docker_version" containerd.io
+apt-cache madison docker-ce
+docker_package_version="$(apt-cache madison docker-ce | awk "/$docker_version~/{print \$3}")"
+apt-get install -y "docker-ce=$docker_package_version" "docker-ce-cli=$docker_package_version" containerd.io
 # let the vagrant user manage docker.
 usermod -aG docker vagrant
