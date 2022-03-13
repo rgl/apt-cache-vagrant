@@ -36,8 +36,6 @@ apt-get update
 # provision other packages to further see the APT cache proxy working.
 
 apt-get install -y vim
-apt-get install -y golang
-apt-get install -y nginx
 
 
 #
