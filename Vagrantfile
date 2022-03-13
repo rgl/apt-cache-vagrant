@@ -9,7 +9,7 @@ Vagrant.configure('2') do |config|
   config.vm.box = 'ubuntu-20.04-amd64'
 
   config.vm.provider 'libvirt' do |lv, config|
-    lv.memory = 256
+    lv.memory = 512
     lv.cpus = 2
     lv.cpu_mode = 'host-passthrough'
     lv.keymap = 'pt'
@@ -18,7 +18,7 @@ Vagrant.configure('2') do |config|
 
   config.vm.provider :virtualbox do |vb|
     vb.linked_clone = true
-    vb.memory = 256
+    vb.memory = 512
     vb.cpus = 2
     vb.customize ['modifyvm', :id, '--cableconnected1', 'on']
   end
